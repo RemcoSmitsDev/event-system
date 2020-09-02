@@ -1,6 +1,7 @@
 <?php
 include_once("./config/init.php");
 include_once("./inc/handle_ticket.php");
+
 if(isset($_GET['email'], $_GET['session_id'])){
     $tickets = new Ticket();
     if(!$ticketsByCustomer = $tickets->get_tickets_by_customer($_GET['session_id']))
@@ -17,7 +18,6 @@ if(isset($_GET['email'], $_GET['session_id'])){
             send_tickets($ticketsByCustomer[0]->first_name, $ticketsByCustomer[0]->last_name,$ticketsByCustomer[0]->email, $i, $ticketsByCustomer[0]->event_date, $codes,$_GET['session_id']);
         }
     $tickets->update_ticket_paid($_GET['session_id']);
-    
 }else{
     header("location: ./index.php");
 }

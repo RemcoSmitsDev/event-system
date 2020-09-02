@@ -24,21 +24,16 @@ function send_tickets($first_name, $last_name, $email, $persons, $date, $codes, 
         ". $email . "&session_id=".$session_id."'><img style='height:100px; width:100px;'
         src='https://chart.googleapis.com/chart?cht=qr&chl=http://localhost/event-system/succes.php?email=
         ". $email . "&session_id=".$session_id."&chs=180x180&choe=UTF-8&chld=L|2'></a>";
-$message .= "\n" . $code;
-}
-try
-{
-mail($email, "Intens festivals tickets for $persons persons",$message, $headers);
-echo"<script>
-console.log('email had been sended');
-</script>";
-
-}catch(Exeption $e){
-echo"<script>
-console.log('".$e."');
-</script>";
-
-}
+    $message .= "\n" . $code;
+    }
+    try
+    {
+        mail($email, "Intens festivals tickets for $persons persons",$message, $headers);
+    }catch(Exeption $e){
+        echo"<script>
+        console.log('".$e."');
+        </script>";
+    }
 }
 
 ?>
