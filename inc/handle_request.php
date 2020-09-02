@@ -5,9 +5,9 @@ include_once "./inc/handle_payment.php";
 
 $tickets = new Ticket();
 
-function validate_requests($array)
+function validate_requests($request)
 {
-    foreach ($array as $key => $item) {
+    foreach ($request as $key => $item) {
         if ($item == "") {
             return false;
         }
