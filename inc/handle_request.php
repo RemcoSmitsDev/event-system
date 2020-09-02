@@ -15,7 +15,7 @@ function validate_requests($array)
 }
 if (isset($_REQUEST)) {
     if (validate_requests($_REQUEST)) {
-        $sessId = payment($_POST['email'], $_POST['event_date'], $_POST['persons']);
+        $sessId = make_payment($_POST['email'], $_POST['event_date'], $_POST['persons']);
     } else {
         header("location: ./index.php");
     }
