@@ -10,30 +10,29 @@ function random_ticket_number()
     return $randstring;
 }
 
-function send_tickets($first_name, $last_name, $email, $persons, $date, $codes, $session_id) {
+function send_tickets($first_name, $last_name, $email, $persons, $date, $codes, $session_id)
+{
     $headers = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'Bcc: info@pedicurepraktijkpapendrecht.nl' . "\r\n";
     $headers .= 'From: info@rswebdevelopment.nl' . "\r\n" .
-      'Reply-To: info@rswebdevelopment.nl' . "\r\n" .
-      'X-Mailer: PHP/' . phpversion();
+    'Reply-To: info@rswebdevelopment.nl' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
     $message = "<p>Beste $first_name,</p>";
     $message .= "<p>You have have orderd a ticket for Intens festivals on $date</p>";
-    foreach($codes as $code){
+    foreach ($codes as $code) {
         $message .= "<a href='https://event-system.rswebdevelopment.nl/succes.php?email=
-        ". $email . "&session_id=".$session_id."'><img style='height:100px; width:100px;'
+        " . $email . "&session_id=" . $session_id . "'><img style='height:100px; width:100px;'
         src='https://chart.googleapis.com/chart?cht=qr&chl=https://event-system.rswebdevelopment.nl/succes.php?email=
-        ". $email . "&session_id=".$session_id."&chs=180x180&choe=UTF-8&chld=L|2'></a>";
-    $message .= "\n" . $code;
+        " . $email . "&session_id=" . $session_id . "&chs=180x180&choe=UTF-8&chld=L|2'></a>";
+        $message .= "\n" . $code;
     }
     try
     {
-        mail($email, "Intens festivals tickets for $persons persons",$message, $headers);
-    }catch(Exeption $e){
-        echo"<script>
-        console.log('".$e."');
+        mail($email, "Intens festivals tickets for $persons persons", $message, $headers);
+    } catch (Exeption $e) {
+        echo "<script>
+        console.log('" . $e . "');
         </script>";
     }
 }
-
-?>
