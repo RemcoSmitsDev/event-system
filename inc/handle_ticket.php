@@ -20,9 +20,9 @@ function send_tickets($first_name, $last_name, $email, $persons, $date, $codes, 
     $message = "<p>Beste $first_name,</p>";
     $message .= "<p>You have have orderd a ticket for Intens festivals on $date</p>";
     foreach($codes as $code){
-        $message .= "<a href='http://localhost/event-system/succes.php?email=
+        $message .= "<a href='https://event-system.rswebdevelopment.nl/succes.php?email=
         ". $email . "&session_id=".$session_id."'><img style='height:100px; width:100px;'
-        src='https://chart.googleapis.com/chart?cht=qr&chl=http://localhost/event-system/succes.php?email=
+        src='https://chart.googleapis.com/chart?cht=qr&chl=https://event-system.rswebdevelopment.nl/succes.php?email=
         ". $email . "&session_id=".$session_id."&chs=180x180&choe=UTF-8&chld=L|2'></a>";
     $message .= "\n" . $code;
     }
