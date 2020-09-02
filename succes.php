@@ -1,8 +1,8 @@
 <?php
 include_once "./config/init.php";
 include_once "./inc/handle_ticket.php";
-
-if (isset($_GET['email'], $_GET['session_id'])) {
+include_once "./inc/handle_request.php";
+if (validate_requests($_REQUEST)) {
     $tickets = new Ticket();
     if (!$ticketsByCustomer = $tickets->get_tickets_by_customer($_GET['session_id'])) {
         header("location: ./index.php");
@@ -59,7 +59,7 @@ foreach ($ticketsByCustomer as $ticket):
                     <div>
                         <a class="inline-block h-20 w-20" rel='nofollow' style='cursor:default'><img
                                 src='https://chart.googleapis.com/chart?cht=qr&chl=http://localhost/event-system/succes.php?email=
-	                                <?=$ticket->email?>&event_date=<?=$ticket->event_date?>&session_id=<?=$ticket->session_id?>&chs=180x180&choe=UTF-8&chld=L|2'></a>
+									                                <?=$ticket->email?>&event_date=<?=$ticket->event_date?>&session_id=<?=$ticket->session_id?>&chs=180x180&choe=UTF-8&chld=L|2'></a>
                         <p class="text-sm"><?=$ticket->code;?></p>
                     </div>
                 </div>
