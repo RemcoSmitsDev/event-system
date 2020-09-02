@@ -11,6 +11,7 @@ function validate_requests($request)
         if ($item == "") {
             return false;
         }
+        return true;
     }
 }
 if (isset($_REQUEST)) {
