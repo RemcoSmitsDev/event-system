@@ -1,7 +1,11 @@
 <?php
+include_once "./vendor/autoload.php";
 include_once "./config/init.php";
 include_once "./inc/handle_ticket.php";
 include_once "./inc/handle_request.php";
+$dotenv = Dotenv\Dotenv::createImmutable("./");
+$dotenv->load();
+
 if (validate_requests($_REQUEST)) {
     $tickets = new Ticket();
     if (!$ticketsByCustomer = $tickets->get_tickets_by_customer($_GET['session_id'])) {
@@ -51,15 +55,16 @@ foreach ($ticketsByCustomer as $ticket):
                 <div class="flex justify-between">
                     <div>
                         <h2 class="text-xl font-semibold">Intens festivals <span
-                                class="hidden sm:block text-xs font-medium"><?=$ticket->event_date;?></span>
+                                class="hidden sm:inline text-xs font-medium"><?=$ticket->event_date;?></span>
                         </h2>
                         <span class="-mt-10 sm:hidden text-xs font-medium"><?=$ticket->event_date;?></span>
                         <p><?=$ticket->first_name . " " . $ticket->last_name;?></p>
+                        <p><?=$ticket->email;?></p>
                     </div>
                     <div>
                         <a class="inline-block h-20 w-20" rel='nofollow' style='cursor:default'><img
                                 src='https://chart.googleapis.com/chart?cht=qr&chl=http://localhost/event-system/succes.php?email=
-									                                <?=$ticket->email?>&event_date=<?=$ticket->event_date?>&session_id=<?=$ticket->session_id?>&chs=180x180&choe=UTF-8&chld=L|2'></a>
+															                                <?=$ticket->email?>&event_date=<?=$ticket->event_date?>&session_id=<?=$ticket->session_id?>&chs=180x180&choe=UTF-8&chld=L|2'></a>
                         <p class="text-sm"><?=$ticket->code;?></p>
                     </div>
                 </div>

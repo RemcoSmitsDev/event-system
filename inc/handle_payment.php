@@ -1,6 +1,4 @@
 <?php
-$dotenv = Dotenv\Dotenv::createImmutable("./");
-$dotenv->load();
 function make_payment($email, $event_date, $aantal)
 {
     $stripe = new \Stripe\StripeClient($_ENV['STRIPE_SECRET_KEY']);
