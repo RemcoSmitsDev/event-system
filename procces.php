@@ -1,13 +1,14 @@
 <?php
 require_once "./vendor/autoload.php";
 include_once "./inc/handle_request.php";
+include_once "./inc/handle_payment.php";
 $dotenv = Dotenv\Dotenv::createImmutable("./");
 $dotenv->load();
 
 $stripe = new \Stripe\StripeClient($_ENV['STRIPE_SECRET_KEY']);
 if (validate_requests($_REQUEST)) {
-    $session_id = $stripe->checkout->sessions->retrieve($sessId)->id;
     $sessId = make_payment($_POST['email'], $_POST['event_date'], $_POST['persons']);
+    $session_id = $stripe->checkout->sessions->retrieve($sessId)->id;
 
     for ($i = 0; $i < $_POST['persons']; $i++) {
         $tickets->create_ticket($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['event_date'], random_ticket_number(), $session_id);
